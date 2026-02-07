@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📔 私人日记 Web App - 龙王博客</title>
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        .project-header {
+            background: linear-gradient(135deg, #fd79a8 0%, #e84393 100%);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+        
+        .project-meta {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+            opacity: 0.9;
+        }
+        
+        .project-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .project-content h2 {
+            color: #e84393;
+            margin: 30px 0 15px;
+        }
+        
+        .project-content p {
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+        
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        
+        .tech-tag {
+            background: linear-gradient(135deg, #fd79a8, #e84393);
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+        }
+        
+        .feature-list {
+            list-style: none;
+            margin: 20px 0;
+        }
+        
+        .feature-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .feature-list li::before {
+            content: '✅';
+        }
+        
+        .github-link {
+            display: inline-block;
+            background: linear-gradient(135deg, #2d3436, #636e72);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 25px;
+            text-decoration: none;
+            margin-top: 20px;
+            font-weight: 500;
+        }
+        
+        .github-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        }
+        
+        .back-link {
+            display: inline-block;
+            margin: 20px;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <a href="../index.html" class="back-link">← 返回首页</a>
+    
+    <header class="project-header">
+        <h1>📔 私人日记 Web App</h1>
+        <p>一个 Twitter 风格的私人日记应用</p>
+        <div class="project-meta">
+            <span>🛠️ 2026年2月</span>
+            <span>⭐ 原创项目</span>
+            <span>🔧 持续维护</span>
+        </div>
+    </header>
+    
+    <div class="project-content">
+        <h2>📖 项目介绍</h2>
+        <p>这是一个完全基于 HTML+CSS+JavaScript 开发的私人日记应用，采用了现代的 Twitter 风格设计理念。它不仅美观，而且功能强大，可以帮助你记录生活中的点点滴滴。</p>
+        
+        <div class="tech-stack">
+            <span class="tech-tag">HTML5</span>
+            <span class="tech-tag">CSS3</span>
+            <span class="tech-tag">JavaScript</span>
+            <span class="tech-tag">LocalStorage</span>
+        </div>
+        
+        <h2>✨ 主要功能</h2>
+        <ul class="feature-list">
+            <li>简洁的发布输入框，支持多行文本</li>
+            <li>8种情绪标签：开心、难过、生气、兴奋、平静、焦虑、感恩、疲惫</li>
+            <li>无限滚动的时间线 Feed</li>
+            <li>日历视图，显示有日记的日期</li>
+            <li>"去年今日"回顾功能</li>
+            <li>数据统计面板（总日记数、字数、连续天数）</li>
+            <li>本地存储，数据保存在浏览器中</li>
+            <li>完全响应式设计，支持手机和电脑</li>
+        </ul>
+        
+        <h2>🎯 设计亮点</h2>
+        <p>采用了紫色渐变的主题色，给人一种温暖而现代的感觉。卡片式的布局让内容清晰明了，平滑的动画效果增添了使用的愉悦感。</p>
+        
+        <h2>🔗 GitHub 仓库</h2>
+        <p>项目代码完全开源，你可以：</p>
+        <ul style="margin-left: 20px;">
+            <li>查看源代码学习</li>
+            <li>Fork 项目进行二次开发</li>
+            <li>提交 Issue 反馈问题</li>
+            <li>贡献代码一起完善</li>
+        </ul>
+        
+        <a href="#" class="github-link">
+            🐙 查看 GitHub 仓库
+        </a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>搜索 - 龙王博客</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .search-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+        
+        .search-container {
+            max-width: 800px;
+            margin: -30px auto 40px;
+            padding: 0 20px;
+        }
+        
+        .search-box {
+            background: white;
+            border-radius: 50px;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+        }
+        
+        .search-box input {
+            flex: 1;
+            border: none;
+            outline: none;
+            padding: 15px 20px;
+            font-size: 1.1rem;
+            border-radius: 50px;
+        }
+        
+        .search-box button {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: transform 0.3s;
+        }
+        
+        .search-box button:hover {
+            transform: scale(1.05);
+        }
+        
+        .search-results {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px 60px;
+        }
+        
+        .result-count {
+            color: #636e72;
+            margin-bottom: 20px;
+        }
+        
+        .result-item {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .result-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+        
+        .result-title {
+            font-size: 1.2rem;
+            color: #2d3436;
+            margin-bottom: 10px;
+        }
+        
+        .result-excerpt {
+            color: #636e72;
+            line-height: 1.7;
+            margin-bottom: 10px;
+        }
+        
+        .result-meta {
+            display: flex;
+            gap: 15px;
+            font-size: 0.85rem;
+            color: #b2bec3;
+        }
+        
+        .result-type {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 3px 10px;
+            border-radius: 10px;
+        }
+        
+        .no-results {
+            text-align: center;
+            padding: 60px 20px;
+            color: #636e72;
+        }
+        
+        .no-results-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+        
+        .back-link {
+            display: inline-block;
+            margin: 20px;
+            color: white;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-link">← 返回首页</a>
+    
+    <header class="search-header">
+        <h1>🔍 搜索</h1>
+        <p style="opacity: 0.9;">在文章和项目中搜索</p>
+    </header>
+    
+    <div class="search-container">
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="输入关键词..." oninput="search()">
+            <button onclick="search()">搜索</button>
+        </div>
+    </div>
+    
+    <div class="search-results" id="searchResults">
+        <!-- 搜索结果将显示在这里 -->
+    </div>
+
+    <script>
+        const searchData = [
+            {
+                type: 'article',
+                title: '🤖 我的 AI 助手伙伴 - OpenClaw 初体验',
+                excerpt: '今天，我开始使用 OpenClaw，这是一款可以在自己设备上运行的 AI 助手工具。这是一个令人兴奋的体验，让我来分享给大家...',
+                url: 'articles/openclaw-experience.html',
+                date: '2026年2月7日',
+                tags: ['AI', '工具', '生产力']
+            },
+            {
+                type: 'article',
+                title: '🎙️ AI 播客制作完全指南',
+                excerpt: '从零开始学习使用 AI 生成播客，包括脚本撰写、语音合成和后期制作。探索如何利用现代 AI 技术来创作高质量音频内容...',
+                url: '#',
+                date: '2026年2月6日',
+                tags: ['播客', 'AI', '音频']
+            },
+            {
+                type: 'article',
+                title: '💻 响应式网页设计最佳实践',
+                excerpt: '分享一些实用的响应式设计技巧，让你的网站在各种设备上都能完美展示。从移动优先到弹性布局...',
+                url: '#',
+                date: '2026年2月5日',
+                tags: ['Web', '设计', 'CSS']
+            },
+            {
+                type: 'project',
+                title: '📔 私人日记 Web App',
+                excerpt: '一个 Twitter 风格的私人日记应用，支持心情标签、日历视图、去年今日回顾功能。基于 HTML+CSS+JS 开发...',
+                url: 'projects/diary-app.html',
+                date: '2026年2月',
+                tags: ['Web App', '日记', '私人']
+            },
+            {
+                type: 'project',
+                title: '🎙️ 每日新闻播客',
+                excerpt: '自动化播客生成系统，每天早上 7:30 自动生成并推送 AI、财经、科技新闻播报。使用 Edge TTS 技术...',
+                url: '#',
+                date: '2026年1月',
+                tags: ['播客', '自动化', 'AI']
+            }
+        ];
+        
+        function search() {
+            const query = document.getElementById('searchInput').value.toLowerCase().trim();
+            const resultsContainer = document.getElementById('searchResults');
+            
+            if (!query) {
+                resultsContainer.innerHTML = `
+                    <div class="no-results">
+                        <div class="no-results-icon">🔍</div>
+                        <p>输入关键词开始搜索...</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            const results = searchData.filter(item => {
+                return item.title.toLowerCase().includes(query) ||
+                       item.excerpt.toLowerCase().includes(query) ||
+                       item.tags.some(tag => tag.toLowerCase().includes(query));
+            });
+            
+            if (results.length === 0) {
+                resultsContainer.innerHTML = `
+                    <div class="no-results">
+                        <div class="no-results-icon">😕</div>
+                        <p>没有找到相关结果</p>
+                        <p style="font-size: 0.9rem; margin-top: 10px;">试试其他关键词</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            resultsContainer.innerHTML = `
+                <p class="result-count">找到 ${results.length} 个结果</p>
+                ${results.map(item => `
+                    <div class="result-item" onclick="window.location.href='${item.url}'">
+                        <div class="result-title">${item.title}</div>
+                        <div class="result-excerpt">${item.excerpt}</div>
+                        <div class="result-meta">
+                            <span class="result-type">${item.type === 'article' ? '📝 文章' : '🚀 项目'}</span>
+                            <span>${item.date}</span>
+                            <span>${item.tags.join(' · ')}</span>
+                        </div>
+                    </div>
+                `).join('')}
+            `;
+        }
+        
+        // 初始显示
+        search();
+    </script>
+</body>
+</html>
