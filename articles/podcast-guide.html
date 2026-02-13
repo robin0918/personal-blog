@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎙️ AI 播客制作完全指南 - 龙王博客</title>
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        .article-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+        
+        .article-meta {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+            opacity: 0.9;
+        }
+        
+        .article-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .article-content h2 {
+            color: #667eea;
+            margin: 40px 0 20px;
+        }
+        
+        .article-content p {
+            line-height: 1.9;
+            margin-bottom: 20px;
+            color: #2d3436;
+        }
+        
+        .article-content ul {
+            margin: 20px 0 20px 30px;
+        }
+        
+        .article-content li {
+            margin-bottom: 15px;
+            line-height: 1.7;
+        }
+        
+        .back-link {
+            display: inline-block;
+            margin-bottom: 30px;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 10px 20px;
+            background: #f0f3ff;
+            border-radius: 25px;
+            transition: all 0.3s;
+        }
+        
+        .back-link:hover {
+            background: #667eea;
+            color: white;
+        }
+        
+        .code-block {
+            background: #1e272e;
+            color: #d2dae2;
+            padding: 20px;
+            border-radius: 10px;
+            overflow-x: auto;
+            margin: 20px 0;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <a href="../index.html" class="back-link">← 返回首页</a>
+    
+    <article>
+        <header class="article-header">
+            <h1>🎙️ AI 播客制作完全指南</h1>
+            <div class="article-meta">
+                <span>📅 2026年2月6日</span>
+                <span>👤 龙王</span>
+                <span>⏱️ 8分钟阅读</span>
+            </div>
+        </header>
+        
+        <div class="article-content">
+            <p>在这个信息爆炸的时代，播客已成为一种越来越受欢迎的内容形式。结合 AI 技术，我们可以轻松制作出专业水准的播客内容。本文将详细介绍如何使用 AI 工具从零开始制作播客。</p>
+            
+            <h2>🎯 为什么要做 AI 播客？</h2>
+            <ul>
+                <li><strong>时间自由</strong> - 早上自动生成，无需手动录制</li>
+                <li><strong>成本低廉</strong> - 无需专业设备和人员</li>
+                <li><strong>持续输出</strong> - 7x24 小时不间断更新</li>
+                <li><strong>多语言支持</strong> - 轻松生成多种语言版本</li>
+            </ul>
+            
+            <h2>🛠️ 所需工具</h2>
+            <ul>
+                <li><strong>文本生成</strong> - ChatGPT、Claude 等 AI 写作助手</li>
+                <li><strong>语音合成</strong> - Edge TTS、OpenAI Whisper 等</li>
+                <li><strong>音频编辑</strong> - FFmpeg、Audacity</li>
+                <li><strong>自动化脚本</strong> - Python、Bash 脚本</li>
+            </ul>
+            
+            <h2>📝 制作流程</h2>
+            
+            <h3>第一步：生成脚本</h3>
+            <p>使用 AI 生成新闻播报脚本，以下是一个简单的 Python 示例：</p>
+            
+            <div class="code-block">
+# AI 播客脚本生成示例
+import openai
+
+def generate_podcast_script(topic, length=500):
+    response = openai.ChatCompletion.create(
+        model="gpt-3.5-turbo",
+        messages=[
+            {"role": "system", "content": "你是一个专业的播客主持人"},
+            {"role": "user", "content": f"生成一篇关于{topic}的播客脚本，约{length}字"}
+        ],
+        max_tokens=length
+    )
+    return response.choices[0].message.content
+            </div>
+            
+            <h3>第二步：语音合成</h3>
+            <p>使用 Edge TTS 进行高质量中文语音合成：</p>
+            
+            <div class="code-block">
+# 安装 edge-tts
+pip install edge-tts
+
+# 使用示例
+import edge_tts
+
+async def text_to_speech(text, output_file="podcast.mp3"):
+    communicate = edge_tts.Communicate(
+        text=text,
+        voice="zh-CN-XiaoxiaoNeural"
+    )
+    await communicate.save(output_file)
+            </div>
+            
+            <h3>第三步：音频处理</h3>
+            <p>使用 FFmpeg 合并音频、添加背景音乐：</p>
+            
+            <div class="code-block">
+# 合并音频并添加背景音乐
+ffmpeg -i voice.mp3 -i bgm.mp3 \
+  -filter_complex "[0:a][1:a]amix=inputs=2:duration=longest" \
+  output.mp3
+            </div>
+            
+            <h2>🚀 自动化部署</h2>
+            <p>使用 cron 任务实现每天自动生成播客：</p>
+            
+            <div class="code-block">
+# 每天早上 7:30 自动生成播客
+30 7 * * * cd /path/to/podcast && python3 generate.py
+            </div>
+            
+            <h2>💡 实用技巧</h2>
+            <ul>
+                <li><strong>选择合适的音色</strong> - 不同场景选择不同风格的语音</li>
+                <li><strong>控制语速</strong> - 新闻类建议 1.2x-1.5x</li>
+                <li><strong>添加间隔</strong> - 在句子之间添加短暂停顿</li>
+                <li><strong>背景音乐</strong> - 选择轻柔的背景音乐，不要喧宾夺主</li>
+            </ul>
+            
+            <h2>🎉 总结</h2>
+            <p>AI 播客制作大大降低了内容创作的门槛。即使没有专业设备和技术背景，也能制作出高质量的音频内容。关键是找到适合自己的工具链，并持续优化内容质量。</p>
+            
+            <p>如果你也对 AI 播客感兴趣，欢迎在评论区分享你的经验和作品！</p>
+        </div>
+    </article>
+</body>
+</html>

@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💻 响应式网页设计最佳实践 - 龙王博客</title>
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        .article-header {
+            background: linear-gradient(135deg, #00b894 0%, #00cec9 100%);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+        
+        .article-meta {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+            opacity: 0.9;
+        }
+        
+        .article-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .article-content h2 {
+            color: #00b894;
+            margin: 40px 0 20px;
+        }
+        
+        .article-content p {
+            line-height: 1.9;
+            margin-bottom: 20px;
+            color: #2d3436;
+        }
+        
+        .article-content ul {
+            margin: 20px 0 20px 30px;
+        }
+        
+        .article-content li {
+            margin-bottom: 15px;
+            line-height: 1.7;
+        }
+        
+        .back-link {
+            display: inline-block;
+            margin-bottom: 30px;
+            color: #00b894;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 10px 20px;
+            background: #e8f8f5;
+            border-radius: 25px;
+            transition: all 0.3s;
+        }
+        
+        .back-link:hover {
+            background: #00b894;
+            color: white;
+        }
+        
+        .code-block {
+            background: #2d3436;
+            color: #dfe6e9;
+            padding: 20px;
+            border-radius: 10px;
+            overflow-x: auto;
+            margin: 20px 0;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 0.85rem;
+            line-height: 1.6;
+        }
+        
+        .tip-box {
+            background: linear-gradient(135deg, #74b9ff, #0984e3);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 30px 0;
+        }
+        
+        .tip-box strong {
+            display: block;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <a href="../index.html" class="back-link">← 返回首页</a>
+    
+    <article>
+        <header class="article-header">
+            <h1>💻 响应式网页设计最佳实践</h1>
+            <div class="article-meta">
+                <span>📅 2026年2月5日</span>
+                <span>👤 龙王</span>
+                <span>⏱️ 6分钟阅读</span>
+            </div>
+        </header>
+        
+        <div class="article-content">
+            <p>在当今多设备时代，响应式网页设计已成为现代网站开发的基本要求。本文分享我在实际项目中总结的响应式设计最佳实践。</p>
+            
+            <h2>📐 为什么响应式设计如此重要？</h2>
+            <ul>
+                <li><strong>用户体验</strong> - 用户在任何设备上都能获得良好体验</li>
+                <li><strong>SEO 优势</strong> - Google 优先索引移动端版本</li>
+                <li><strong>维护成本</strong> - 一套代码适配所有设备</li>
+                <li><strong>未来proof</strong> - 轻松适配新设备尺寸</li>
+            </ul>
+            
+            <h2>🎯 核心原则</h2>
+            
+            <h3>1. 移动优先（Mobile First）</h3>
+            <p>从最小屏幕开始设计，逐步增强到大屏幕。这能确保核心内容在所有设备上都能正常显示。</p>
+            
+            <div class="code-block">
+/* 移动优先写法 */
+.container {
+    width: 100%;
+    padding: 15px;
+}
+
+/* 平板及以上 */
+@media (min-width: 768px) {
+    .container {
+        max-width: 720px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+}
+
+/* 桌面及以上 */
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1140px;
+    }
+}
+            </div>
+            
+            <h3>2. 使用弹性布局（Flexbox）</h3>
+            <p>Flexbox 是处理一维布局的最佳选择，特别适合导航栏、卡片列表等场景。</p>
+            
+            <div class="code-block">
+/* 弹性布局示例 */
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.card {
+    flex: 1 1 300px;
+    max-width: 400px;
+}
+
+/* 移动端单列 */
+@media (max-width: 768px) {
+    .card {
+        flex: 1 1 100%;
+    }
+}
+            </div>
+            
+            <h3>3. 使用网格布局（Grid）</h3>
+            <p>CSS Grid 是处理二维布局的利器，适合复杂的页面结构。</p>
+            
+            <div class="code-block">
+/* 网格布局示例 */
+.page-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+@media (min-width: 768px) {
+    .page-layout {
+        grid-template-columns: 2fr 1fr;
+    }
+}
+
+@media (min-width: 1200px) {
+    .page-layout {
+        grid-template-columns: 3fr 1fr;
+    }
+}
+            </div>
+            
+            <h3>4. 灵活的图片</h3>
+            <p>图片需要能够根据容器大小自动调整。</p>
+            
+            <div class="code-block">
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* 使用 picture 元素实现响应图片 */
+<picture>
+    <source media="(min-width: 1200px)" srcset="large.jpg">
+    <source media="(min-width: 768px)" srcset="medium.jpg">
+    <img src="small.jpg" alt="响应式图片">
+</picture>
+            </div>
+            
+            <h2>🧪 常用断点选择</h2>
+            <ul>
+                <li><strong>小型手机</strong> - max-width: 479px</li>
+                <li><strong>大型手机</strong> - min-width: 480px / max-width: 767px</li>
+                <li><strong>平板</strong> - min-width: 768px / max-width: 1023px</li>
+                <li><strong>桌面</strong> - min-width: 1024px / max-width: 1279px</li>
+                <li><strong>大型桌面</strong> - min-width: 1280px</li>
+            </ul>
+            
+            <div class="tip-box">
+                <strong>💡 实用建议</strong>
+                不要过度依赖固定断点。根据内容实际需求设置断点，让设计自然流动。
+            </div>
+            
+            <h2>⚡ 性能优化</h2>
+            <ul>
+                <li><strong>图片优化</strong> - 使用 WebP 格式，配合响应式图片</li>
+                <li><strong>延迟加载</strong> - 图片使用 lazy loading</li>
+                <li><strong>CSS 精简</strong> - 使用 CSS 自定义属性减少重复代码</li>
+                <li><strong>字体优化</strong> - 使用系统字体或 subset 字体</li>
+            </ul>
+            
+            <h2>🛠️ 实用工具推荐</h2>
+            <ul>
+                <li><strong>Chrome DevTools</strong> - 设备模拟器</li>
+                <li><strong>BrowserStack</strong> - 跨浏览器测试</li>
+                <li><strong>Responsinator</strong> - 快速预览响应式效果</li>
+                <li><strong>Unsplash</strong> - 免费高质量图片</li>
+            </ul>
+            
+            <h2>🎉 总结</h2>
+            <p>响应式设计不是额外的工作，而是现代网页开发的基础。通过合理的布局、灵活的图片和适当的断点，我们可以为用户提供一致的优质体验。</p>
+            
+            <p>记住：内容永远是主角，设计只是让内容更好地呈现。</p>
+        </div>
+    </article>
+</body>
+</html>
